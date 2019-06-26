@@ -1,5 +1,6 @@
 package com.utilityservice.api.service;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.compute.Compute;
 import com.google.api.services.compute.model.InstanceGroupAggregatedList;
 import com.google.api.services.compute.model.InstanceGroupsScopedList;
+import com.google.auth.oauth2.GoogleCredentials;
 
 @Service
 public class GoogleZoneFinder {
@@ -60,7 +62,8 @@ public class GoogleZoneFinder {
 	public Compute createComputeService() throws GeneralSecurityException, IOException {
 		HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
 	    JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();	    
-	    GoogleCredential credential = GoogleCredential.getApplicationDefault();	    
+	 //   GoogleCredential credential = GoogleCredential.getApplicationDefault();
+	    GoogleCredential credential =  GoogleCredential.fromStream(new FileInputStream("C:/COE/coe_repo/utility-service/src/main/resources/sapient-si-dsst-184990-d217f9ffcafe.json")); 
 	    if (credential.createScopedRequired()) {
 	      credential =
 	          credential.createScoped(Arrays.asList("https://www.googleapis.com/auth/cloud-platform"));
