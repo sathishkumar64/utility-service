@@ -1,0 +1,29 @@
+apiVersion: skaffold/v1beta12
+kind: Config
+build:
+  artifacts:
+   - image: gcr.io/sapient-si-dsst-184990/utility-service
+     context: ../utility-service/
+     #jibMaven: {}
+     
+#deploy:
+  #kubectl:
+    #manifests:
+     # - ../utility-service/kubernetes/*
+    
+      
+profiles:
+  - name: gcb
+    build:
+      googleCloudBuild:
+        projectId: sapient-si-dsst-184990
+       # diskSizeGb: 300
+       # machineType: "N1_HIGHCPU_32"      
+      
+      
+      
+#portForward:
+ # - resourceType: deployment
+  #  resourceName: studentservice
+ #   port: 8080
+  #  localPort: 8098
